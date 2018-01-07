@@ -26,6 +26,7 @@ pipeline {
       parallel{
         stage ('Deploy to Staging'){
           steps {
+            echo 'test'
             bat "pscp -i /Jenkins/tomcat-demo.ppk **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
           }
         }
