@@ -13,6 +13,7 @@ pipeline {
   stages{
     stage('Build'){
       steps {
+        bat "echo %cd%"
         bat 'mvn clean package'
       }
       post {
@@ -26,7 +27,6 @@ pipeline {
       parallel{
         stage ('Deploy to Staging'){
           steps {
-            bat "echo %cd%"
             bat "pscp -i /Jenkins/tomcat-demo.ppk /Jenkins/maven-project/webapp/target/webapp.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
           }
         }
